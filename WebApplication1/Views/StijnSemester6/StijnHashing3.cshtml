@@ -1,0 +1,70 @@
+﻿@model HashingModel
+@{
+    ViewData["Title"] = "Tekst Hashen";
+}
+
+<h2>Tekst Hashen</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label>Voer je tekst in:</label>
+        <input type="text" name="Tekst" class="form-control" value="@Model.Tekst" required />
+    </div>
+
+    <div class="form-group mt-3">
+        <label>Kies een hash algoritme:</label><br />
+        @foreach (var algo in new[] { "MD5", "SHA1", "SHA256", "SHA512", "BCrypt" })
+        {
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="GekozenAlgoritme" value="@algo" @(Model.GekozenAlgoritme == algo ? "checked" : "") required />
+                <label class="form-check-label">@algo</label>
+            </div>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#resultModal">
+        Hashen
+    </button>
+</form>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Gehashte waarde</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sluiten"></button>
+            </div>
+            <div class="modal-body">
+                @if (!string.IsNullOrEmpty(Model.GehashteWaarde))
+                {
+                    <p><strong>Ingevoerde tekst:</strong> @Model.Tekst</p>
+                    <p><strong>Algoritme:</strong> @Model.GekozenAlgoritme</p>
+                    <p><strong>Hash:</strong> <code>@Model.GehashteWaarde</code></p>
+                }
+                else
+                {
+                    <p>Voer een tekst in en kies een algoritme om de hash te zien.</p>
+                }
+            </div>
+            <div class="modal-footer">
+@*                 <button type="submit" class="btn btn-primary mt-3">
+                    Hashen
+                </button> *@
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        window.onload = function () {
+            var hasValue = '@(string.IsNullOrEmpty(Model.GehashteWaarde) ? "false" : "true")';
+            if (hasValue === "true") {
+                var myModal = new bootstrap.Modal(document.getElementById('resultModal'));
+                myModal.show();
+            }
+        };
+    </script>
+}
