@@ -1,0 +1,23 @@
+﻿@model RegisterViewModel
+
+<h2>Registreren</h2>
+
+<form asp-action="Register" method="post">
+    <div class="form-group">
+        <label>Voornaam</label>
+        <input asp-for="Voornaam" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Wachtwoord</label>
+        <input asp-for="Wachtwoord" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Bevestig wachtwoord</label>
+        <input asp-for="BevestigWachtwoord" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Registreer</button>
+</form>

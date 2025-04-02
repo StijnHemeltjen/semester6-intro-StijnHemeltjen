@@ -29,6 +29,25 @@
                             <a class="nav-link text-dark" asp-controller="StijnSemester6" asp-action="StijnHashing3">Hashing</a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Register">Registreren</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Login">Inloggen</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Logout">Uitloggen</a>
+                        </li>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Admin" asp-action="ManageUsers">Gebruikers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Admin" asp-action="ManageRoles">Rollen</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
